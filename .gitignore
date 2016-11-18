@@ -3,3 +3,5 @@ build
 target
 Servers
 .metadata
+.recommenders/
+RandomDataGenerator/
