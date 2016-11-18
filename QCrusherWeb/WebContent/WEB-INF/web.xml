@@ -18,7 +18,7 @@
 	</filter-mapping>
 
 	<welcome-file-list>
-		<welcome-file>loginView.do</welcome-file>
+		<welcome-file>login.do</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
