@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+/Users/Jolteon/SD/Java/quizCrusherWS/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2642206456.index
+1843650064.index
+1325124412.index
+2620274702.index
+451439541.index
+2629129008.index
