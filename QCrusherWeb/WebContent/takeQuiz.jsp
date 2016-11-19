@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Quiz Selection</title>
+
+</head>
+<body>
 <div>What is the capital of Alberta?</div>
 
 <div>Answer: <input type="text" name="userAnswer">
@@ -13,7 +16,7 @@
 </div>
 <div>
 	Correct answer: ${correctAnswer }
-	Percent Match${Regex Calculation }
+	Percent Match${regexCalculation }
 	<input class="quizButton" type="button" value="nextQuestion">Next</button>
 	
 	 <form action="demo_form.asp">
@@ -23,9 +26,6 @@
 		Rating Box <div class="rating">
 		<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></div>
 </div>
-
-</head>
-<body>
 
 </body>
 </html>

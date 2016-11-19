@@ -6,10 +6,13 @@
 <link rel="stylesheet" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Quiz Scoring</title>
-Score {score}
-<a href="main.do"> Back to Main Page</a>
+
 </head>
 <body>
+Score {score}
 
+<form method="link" action="main.do">
+		<input type="submit" value="Back to Main Page">
+	</form>
 </body>
 </html>

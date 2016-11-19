@@ -16,10 +16,16 @@
 <title>Homepage</title>
 </head>
 <body>
-<a href="takeQuiz.do"> Take a Quiz</a>
-	Browse By Category
-<p>Create a Quiz</p>
-<a href="profile.do"> View My Profile</a>
-Browse Users
+<form method="link" action="takeQuiz.do">
+		<input type="submit" value="Take a Quiz">
+	</form>
+<!-- 	Browse By Category -->
+<form method="link" action="createQuiz.do">
+		<input type="submit" value="CreateQuiz">
+	</form>
+<form method="link" action="profile.do">
+		<input type="submit" value="View My Profile">
+	</form>
+<!-- Browse Users -->
 </body>
 </html>
