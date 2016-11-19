@@ -18,6 +18,7 @@ Username: <input type="text" name="username">
 Password: <input type="text" name="password">
 <a href="main.do">Log-in</a>
 <a href="createAccount.do">Create Account</a>
+<a href="takequiz.do">Continue as guest</a>
 </head>
 <body>
 

@@ -32,13 +32,13 @@ public class QCrusherController {
 		return "main.jsp";
 	}
 	
-	@RequestMapping("/takequiz.do")
-	public String takequiz(){
-		return "takequiz.jsp";
+	@RequestMapping("/takeQuiz.do")
+	public String takeQuiz(){
+		return "takeQuiz.jsp";
 	}
 	
-	@RequestMapping("/scorequiz.do")
-	public String scorequiz(){
-		return "scorequiz.jsp";
+	@RequestMapping("/scoreQuiz.do")
+	public String scoreQuiz(){
+		return "scoreQuiz.jsp";
 	}
 }

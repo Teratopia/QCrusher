@@ -16,7 +16,7 @@
 <title>Homepage</title>
 </head>
 <body>
-<p><a href="takequiz.do"> Take a Quiz</a><p>
+<a href="takeQuiz.do"> Take a Quiz</a>
 	Browse By Category
 <p>Create a Quiz</p>
 <a href="profile.do"> View My Profile</a>
