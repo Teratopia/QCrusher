@@ -13,9 +13,23 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 <title>QCrusher Login</title>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">QCrusher</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="main.do">Main Page</a></li>
+      <li><a href="profile.do">Profile </a></li>
+      <li><a href="createQuiz.do">Create Quiz</a></li> 
+      <li><a href="about.html">About Us</a></li> 
+    </ul>
+  </div>
+</nav>
 Username: <input type="text" name="username">
 Password: <input type="text" name="password">
 	<form method="link" action="main.do">

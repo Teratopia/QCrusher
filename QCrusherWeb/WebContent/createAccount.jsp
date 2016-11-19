@@ -13,13 +13,31 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 <title>Create Account</title>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">QCrusher</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="main.do">Main Page</a></li>
+      <li><a href="profile.do">Profile </a></li>
+      <li><a href="createQuiz.do">Create Quiz</a></li> 
+      <li><a href="about.html">About Us</a></li> 
+    </ul>
+  </div>
+</nav>
+ <div class="container-fluid">
+	<div class="row">
 First Name: <input type="text" name="firstName">
 Last Name: <input type="text" name="lastName">
 Enter Password: <input type="text" name="password">
 Re-enter to Confirm: <input type="text" name="password">
 <a href="main.do">Continue to Quiz</a>
+</div>
+</div>
 </body>
 </html>
