@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>One Page Wonder - Start Bootstrap Template</title>
+<title>QuizCrusher</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -91,7 +91,12 @@
 
 	<form method="link" action="takeQuiz.do">
 		<input type="submit" value="Take Quiz">
-	</form></p>
+	</form>
+	<form method="link" action="takeQuiz.do">
+		<input type="submit" value="Continue as Guest">
+	</form>
+	
+	</p>
 			
         </div>
 
