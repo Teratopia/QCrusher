@@ -36,6 +36,10 @@ public class QCrusherController {
 	public String createQuiz(){
 		return "createQuiz.jsp";
 	}
+	@RequestMapping("/createAccount.do")
+	public String createAccount(){
+		return "createAccount.jsp";
+	}
 	
 	@RequestMapping("/takeQuiz.do")
 	public String takeQuiz(){
