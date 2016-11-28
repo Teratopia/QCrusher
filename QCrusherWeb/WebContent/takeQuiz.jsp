@@ -12,13 +12,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>One Page Wonder - Start Bootstrap Template</title>
+<title>Take Quiz</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="css/one-page-wonder.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
