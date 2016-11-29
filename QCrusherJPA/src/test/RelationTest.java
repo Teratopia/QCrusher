@@ -34,19 +34,31 @@ public class RelationTest {
 
 	@Test
 	public void testSelfReferentialObjectFields() {
-		
+		//Attempt
 		Attempt a = em.find(Attempt.class, 1);
 		assertEquals("2016-11-19", a.getDateTime().toString());
+		
+		//AttemptQuestion
 		AttemptQuestion aq = em.find(AttemptQuestion.class, 1);
 		assertEquals(1, aq.getPassFail());
+		
+		//QuestionObject
 		QuestionObject qo = em.find(QuestionObject.class, 1);
 		assertEquals("Yellow", qo.getAnswer());
+
+		//QuestionRating
 		QuestionRating qr = em.find(QuestionRating.class, 1);
 		assertEquals(10, qr.getRating());
+		
+		//Quiz
 		Quiz q = em.find(Quiz.class, 1);
 		assertEquals("A Quiz To Remember", q.getName());
+
+		//QuizRating
 		QuizRating quizRating = em.find(QuizRating.class, 1);
 		assertEquals("A thrilling quiz! Wonderful experience all around!", quizRating.getFeedback());
+
+		//User
 		User u = em.find(User.class, 1);
 		assertEquals("testpassword", u.getPassword());
 	}
