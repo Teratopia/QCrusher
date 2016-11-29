@@ -41,9 +41,9 @@ public class Attempt {
 		}
 		if(!attemptQuestions.contains(aq)){
 			attemptQuestions.add(aq);
-			if(aq.getAttempt()!=null){
-				aq.getAttempt().getAttemptQuestions().remove(aq);
-			}
+//			if(aq.getAttempt()!=null){
+//				aq.getAttempt().getAttemptQuestions().remove(aq);
+//			}
 			aq.setAttempt(this);
 		}
 	}

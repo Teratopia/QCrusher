@@ -35,11 +35,9 @@ public class User {
 		}
 		if(!attempts.contains(attempt)){
 			attempts.add(attempt);
-			if(attempt.getUser() != null){
-				attempt.getUser().getAttempts().remove(attempt);
-			}
-			attempt.setUser(this);
+
 		}
+		attempt.setUser(this);
 		
 	}
 	
@@ -58,11 +56,8 @@ public class User {
 		}
 		if (!quizzes.contains(quiz)) {
 			quizzes.add(quiz);
-			if (quiz.getUser() != null) {
-				quiz.getUser().getQuizzes().remove(quiz);
-			}
-			quiz.setUser(this);
 		}
+		quiz.setUser(this);
 	}
 
 	public void removeQuiz(Quiz quiz) {
@@ -78,11 +73,8 @@ public class User {
 		}
 		if(!quizRatings.contains(qr)){
 			quizRatings.add(qr);
-			if(qr.getUser()!=null){
-				qr.getUser().getAttempts().remove(qr);
-			}
-			qr.setUser(this);
 		}
+		qr.setUser(this);
 	}
 	
 	public void removeQuizRating(QuizRating qr){
@@ -91,18 +83,15 @@ public class User {
 			quizRatings.remove(qr);
 		}
 	}
-	
+	//may want to remove first if statement? id may be enough for doubles
 	public void addQuestionRating(QuestionRating qr){
-		if(questionRatings != null){
+		if(questionRatings == null){
 			questionRatings = new HashSet<QuestionRating>();
 		}
 		if(!questionRatings.contains(qr)){
 			questionRatings.add(qr);
-			if(qr.getUser() != null){
-				qr.getUser().getQuestionRatings().remove(qr);
-			}
-			qr.setUser(this);
 		}
+		qr.setUser(this);
 	}
 	
 	public void removeQuestionRating(QuestionRating qr){

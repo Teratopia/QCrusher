@@ -70,14 +70,12 @@ public class QuestionObject {
 }
 	
 	public void addQuestionRating(QuestionRating qr){
-		if(questionRatings != null){
+		if(questionRatings == null){
 			questionRatings = new HashSet<QuestionRating>();
 		}
 		if(!questionRatings.contains(qr)){
 			questionRatings.add(qr);
-			if(qr.getQuestionObject() != null){
-				qr.getQuestionObject().getQuestionRatings().remove(qr);
-			}
+
 			qr.setQuestionObject(this);
 		}
 	}
