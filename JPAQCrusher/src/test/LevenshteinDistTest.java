@@ -15,6 +15,13 @@ public class LevenshteinDistTest {
 			return s.length();
 		}
 
+		if(t.length()>s.length()){
+			String t1 = s;
+			String s1 = t;
+			s = s1;
+			t = t1;
+		}
+
 		int[] v0 = new int[t.length() + 1];
 		int[] v1 = new int[s.length() + 1]; // t.length?
 
@@ -47,6 +54,12 @@ public class LevenshteinDistTest {
 	}
 	
 	public static void main(String[] args) {
+//		levTest();
+		percentTest();
+		
+	}
+	
+	public static void levTest(){
 		boolean gotIt = false;
 		Scanner s = new java.util.Scanner(System.in);
 		
@@ -63,6 +76,30 @@ public class LevenshteinDistTest {
 		}
 		
 		s.close();
+	}
+	
+	public static void percentTest(){
+		
+		boolean gotIt = false;
+		Scanner s = new java.util.Scanner(System.in);
+		
+		while(gotIt==false){
+		System.out.println("Enter string one: ");
+		String input1 = s.nextLine();
+		System.out.println("Enter string two: ");
+		String input2 = s.nextLine();
+		int levenInt = levenshteinDist(input1, input2);
+		System.out.println("Levenshtein Distance: "+levenInt);
+		System.out.println();
+		double percent = (double)(input1.length()-levenInt)/input1.length();
+		System.out.println("Percent Match: "+percent);
+		System.out.println();
+		if(levenInt == 0){ gotIt = true;}
+		
+		}
+		
+		s.close();
+		
 	}
 	
 }
