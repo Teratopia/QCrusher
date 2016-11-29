@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -221,9 +222,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qcrusherdb`;
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (1, 'jbone', 'testpassword');
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (2, 'ymenase', 'testpassword');
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (3, 'kennis', 'testpassword');
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (1, 'jbone', 'testpassword', 'ROLE_ADMIN');
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (2, 'ymenase', 'testpassword', 'ROLE_USER');
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (3, 'kennis', 'testpassword', 'ROLE_ADMIN');
 
 COMMIT;
 
