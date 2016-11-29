@@ -1,7 +1,8 @@
 package data;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,14 +30,73 @@ public class Quiz {
 	@JoinColumn(name="creator_id")
 	private User user;
 	@OneToMany(mappedBy = "quiz")
-	private List<Attempt> attempts;
+	private Set<Attempt> attempts;
 	@OneToMany(mappedBy = "quiz")
-	private List<QuizRating> quizRatings;
+	private Set<QuizRating> quizRatings;
 	@ManyToMany(mappedBy="quizzes")
-	private List<QuestionObject> questionObjects;
-	
+	private Set<QuestionObject> questionObjects;
 	
 	public Quiz(){}
+	
+	public void addAttempt(Attempt attempt){
+		if(attempts == null){
+			attempts = new HashSet<Attempt>();
+		}
+		if(!attempts.contains(attempt)){
+			attempts.add(attempt);
+			if(attempt.getQuiz() != null){
+				attempt.getQuiz().getAttempts().remove(attempt);
+			}
+			attempt.setQuiz(this);
+		}
+		
+	}
+	
+	public void removeAttempt(Attempt attempt){
+		
+		attempt.setQuiz(null);
+		if(attempts!=null){
+			attempts.remove(attempt);
+		}
+		
+	}
+	
+	public void addQuizRating(QuizRating qr){
+		if(quizRatings == null){
+			quizRatings = new HashSet<QuizRating>();
+		}
+		if(!quizRatings.contains(qr)){
+			quizRatings.add(qr);
+			if(qr.getQuiz()!=null){
+				qr.getQuiz().getAttempts().remove(qr);
+			}
+			qr.setQuiz(this);
+		}
+	}
+	
+	public void removeQuizRating(QuizRating qr){
+		qr.setQuiz(null);
+		if(quizRatings!=null){
+			quizRatings.remove(qr);
+		}
+	}
+	
+	public void addQuestionObject(QuestionObject qo){
+		if(questionObjects == null){
+			questionObjects = new HashSet<QuestionObject>();
+		}
+		if(!questionObjects.contains(qo)){
+			questionObjects.add(qo);
+		}
+		qo.addQuiz(this);
+		
+	}
+	
+	public void removeQuestionObject(QuestionObject qo){
+		qo.removeQuiz(this);
+		questionObjects.remove(qo);
+		
+	}
 
 	public int getId() {
 		return id;
@@ -73,27 +133,27 @@ public class Quiz {
 		this.user = user;
 	}
 
-	public List<Attempt> getAttempts() {
+	public Set<Attempt> getAttempts() {
 		return attempts;
 	}
 
-	public void setAttempts(List<Attempt> attempts) {
+	public void setAttempts(Set<Attempt> attempts) {
 		this.attempts = attempts;
 	}
 
-	public List<QuizRating> getQuizRatings() {
+	public Set<QuizRating> getQuizRatings() {
 		return quizRatings;
 	}
 
-	public void setQuizRatings(List<QuizRating> quizRatings) {
+	public void setQuizRatings(Set<QuizRating> quizRatings) {
 		this.quizRatings = quizRatings;
 	}
 
-	public List<QuestionObject> getQuestionObjects() {
+	public Set<QuestionObject> getQuestionObjects() {
 		return questionObjects;
 	}
 
-	public void setQuestionObjects(List<QuestionObject> questionObjects) {
+	public void setQuestionObjects(Set<QuestionObject> questionObjects) {
 		this.questionObjects = questionObjects;
 	}
 

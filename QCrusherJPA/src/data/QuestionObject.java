@@ -1,6 +1,6 @@
 package data;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="question_object")
+@Table(name = "question_object")
 public class QuestionObject {
 
 	@Id
@@ -22,24 +22,76 @@ public class QuestionObject {
 	private int id;
 	private String question;
 	private String answer;
-//	private String category; //Enum?
-//	private int creatorId;
+	// private String category; //Enum?
+	// private int creatorId;
 	@ManyToMany
-	@JoinTable(name="quiz_question", 
-		joinColumns=@JoinColumn(name="question_id"), 
-		inverseJoinColumns=@JoinColumn(name="quiz_id"))
-	private List<Quiz> quizzes;
+	@JoinTable(name = "quiz_question", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
+	private Set<Quiz> quizzes;
 	@OneToMany(mappedBy = "questionObject")
 	private Set<AttemptQuestion> attemptQuestions;
 	@OneToMany(mappedBy = "questionObject")
 	private Set<QuestionRating> questionRatings;
+
+	public QuestionObject() {
+	}
+
+	public void addQuiz(Quiz quiz) {
+		if (quizzes == null) {
+			quizzes = new HashSet<Quiz>();
+		}
+		if (!quizzes.contains(quiz)) {
+			quizzes.add(quiz);
+		}
+	}
+
+	public void removeQuiz(Quiz quiz) {
+		if (quizzes != null) {
+			quizzes.remove(quiz);
+		}
+	}
+
+	public void addAttemptQuestion(AttemptQuestion aq) {
+		if (attemptQuestions == null) {
+			attemptQuestions = new HashSet<AttemptQuestion>();
+		}
+		if (!attemptQuestions.contains(aq)) {
+			attemptQuestions.add(aq);
+			if (aq.getAttempt() != null) {
+				aq.getAttempt().getAttemptQuestions().remove(aq);
+			}
+			aq.setQuestionObject(this);
+		}
+	}
+
+	public void removeAttemptQuestion(AttemptQuestion aq){
+	if(attemptQuestions != null){
+		attemptQuestions.remove(aq);
+	}
+}
 	
+	public void addQuestionRating(QuestionRating qr){
+		if(questionRatings != null){
+			questionRatings = new HashSet<QuestionRating>();
+		}
+		if(!questionRatings.contains(qr)){
+			questionRatings.add(qr);
+			if(qr.getQuestionObject() != null){
+				qr.getQuestionObject().getQuestionRatings().remove(qr);
+			}
+			qr.setQuestionObject(this);
+		}
+	}
 	
-	public QuestionObject(){}
+	public void removeQuestionRating(QuestionRating qr){
+		if(questionRatings != null){
+			questionRatings.remove(qr);
+		}
+	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -47,21 +99,24 @@ public class QuestionObject {
 	public String getQuestion() {
 		return question;
 	}
+
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+
 	public String getAnswer() {
 		return answer;
 	}
+
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 
-	public List<Quiz> getQuizzes() {
+	public Set<Quiz> getQuizzes() {
 		return quizzes;
 	}
 
-	public void setQuizzes(List<Quiz> quizzes) {
+	public void setQuizzes(Set<Quiz> quizzes) {
 		this.quizzes = quizzes;
 	}
 
@@ -87,5 +142,4 @@ public class QuestionObject {
 				+ ", attemptQuestions=" + attemptQuestions + ", questionRatings=" + questionRatings + "]";
 	}
 
-	
 }

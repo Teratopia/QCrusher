@@ -1,7 +1,8 @@
 package data;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,9 +31,28 @@ public class Attempt {
 	@JoinColumn(name="quiz_id")
 	private Quiz quiz;
 	@OneToMany(mappedBy = "attempt")
-	private List<AttemptQuestion> attemptQuestions;
+	private Set<AttemptQuestion> attemptQuestions;
 	
 	public Attempt(){}
+	
+	public void addAttemptQuestion(AttemptQuestion aq){
+		if(attemptQuestions==null){
+			attemptQuestions = new HashSet<AttemptQuestion>();
+		}
+		if(!attemptQuestions.contains(aq)){
+			attemptQuestions.add(aq);
+			if(aq.getAttempt()!=null){
+				aq.getAttempt().getAttemptQuestions().remove(aq);
+			}
+			aq.setAttempt(this);
+		}
+	}
+	
+	public void removeAttemptQuestion(AttemptQuestion aq){
+		if(attemptQuestions != null){
+			attemptQuestions.remove(aq);
+		}
+	}
 
 	public int getId() {
 		return id;
@@ -62,11 +82,11 @@ public class Attempt {
 		this.quiz = quiz;
 	}
 
-	public List<AttemptQuestion> getAttemptQuestions() {
+	public Set<AttemptQuestion> getAttemptQuestions() {
 		return attemptQuestions;
 	}
 
-	public void setAttemptQuestions(List<AttemptQuestion> attemptQuestions) {
+	public void setAttemptQuestions(Set<AttemptQuestion> attemptQuestions) {
 		this.attemptQuestions = attemptQuestions;
 	}
 
