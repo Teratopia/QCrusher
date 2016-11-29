@@ -44,11 +44,8 @@ public class Quiz {
 		}
 		if(!attempts.contains(attempt)){
 			attempts.add(attempt);
-			if(attempt.getQuiz() != null){
-				attempt.getQuiz().getAttempts().remove(attempt);
-			}
-			attempt.setQuiz(this);
 		}
+		attempt.setQuiz(this);
 		
 	}
 	
@@ -67,11 +64,8 @@ public class Quiz {
 		}
 		if(!quizRatings.contains(qr)){
 			quizRatings.add(qr);
-			if(qr.getQuiz()!=null){
-				qr.getQuiz().getAttempts().remove(qr);
-			}
-			qr.setQuiz(this);
 		}
+		qr.setQuiz(this);
 	}
 	
 	public void removeQuizRating(QuizRating qr){

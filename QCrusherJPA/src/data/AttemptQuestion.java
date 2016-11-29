@@ -26,6 +26,13 @@ public class AttemptQuestion {
 	private QuestionObject questionObject;
 	
 	public AttemptQuestion(){}
+	
+	public AttemptQuestion(int passFail, Attempt attempt, QuestionObject questionObject) {
+		super();
+		this.passFail = passFail;
+		this.attempt = attempt;
+		this.questionObject = questionObject;
+	}
 
 	public int getPassFail() {
 		return passFail;

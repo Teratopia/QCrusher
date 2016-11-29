@@ -22,8 +22,9 @@ public class AttemptTest {
 	
 	@Test
 	public void test() {
-		Staff st = em.find(Staff.class, 5);
-		assertEquals("Steve", st.getFirstName());
+		
+		
+		
 	}
 	
 	@After
