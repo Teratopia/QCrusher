@@ -1,14 +1,18 @@
 package data;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import security.UserRole;
+
 
 @Entity
 public class User {
@@ -18,6 +22,8 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 	@OneToMany(mappedBy="user")
 	private Set<Attempt> attempts;
 	@OneToMany(mappedBy="user")
@@ -116,9 +122,6 @@ public class User {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public Set<Attempt> getAttempts() {
 		return attempts;
@@ -150,6 +153,14 @@ public class User {
 
 	public void setQuestionRatings(Set<QuestionRating> questionRatings) {
 		this.questionRatings = questionRatings;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import data.QuestionRating;
 import data.Quiz;
 import data.QuizRating;
 import data.User;
+import security.UserRole;
 
 
 public class RelationTest {
@@ -77,6 +78,8 @@ public class RelationTest {
 		
 		Set<QuestionRating> questionRatings = u.getQuestionRatings();
 		assertEquals(2, questionRatings.size());
+		
+		assertEquals(u.getRole(), UserRole.ROLE_ADMIN);
 	}
 	
 	@Test

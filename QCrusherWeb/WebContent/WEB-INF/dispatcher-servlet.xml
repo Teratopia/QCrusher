@@ -14,4 +14,15 @@
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
     	<property name="basename" value="/WEB-INF/ValidationMessages" />
   	</bean>
+  	
+   <bean id="myEntityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="qcrusher" />
+    </bean>
+
+    <bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="myEntityManagerFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="myTransactionManager" />
 </beans>
