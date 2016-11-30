@@ -20,7 +20,7 @@ public class LoginController {
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
 			System.out.println(error);
-			model.addObject("error", "Invalid username and password TEST TEST!");
+			model.addObject("error", "Invalid username and password!");
 		}
 
 		model.setViewName("login.jsp");

@@ -8,6 +8,7 @@
 <div id="header">
 	<sec:authorize access="isAnonymous()">
 		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/login"/>">Log In</a></div>
+		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/signup"/>">Sign Up</a></div>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/logout"/>">Log Out</a></div>

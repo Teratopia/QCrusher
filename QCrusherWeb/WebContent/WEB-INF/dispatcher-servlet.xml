@@ -23,6 +23,8 @@
     <bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="myEntityManagerFactory" />
     </bean>
-
+    
     <tx:annotation-driven transaction-manager="myTransactionManager" />
+
+    <bean id="userDAO" class="dao.UserDAO"/> 
 </beans>
