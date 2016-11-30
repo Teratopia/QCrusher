@@ -35,7 +35,7 @@ public class AddRemoveTest {
 		Attempt a = em.find(Attempt.class, 1);
 		
 		QuestionObject qo = em.find(QuestionObject.class, 5);
-		AttemptQuestion aq = new AttemptQuestion(0, a, qo);
+		AttemptQuestion aq = new AttemptQuestion(false, a, qo);
 		int numberOfAQs = a.getAttemptQuestions().size();
 		a.addAttemptQuestion(aq);
 		assertEquals(numberOfAQs+1, a.getAttemptQuestions().size());

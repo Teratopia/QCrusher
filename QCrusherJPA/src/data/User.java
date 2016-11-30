@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class User {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private Set<Attempt> attempts;
 	@OneToMany(mappedBy="user")
 	private Set<Quiz> quizzes;
@@ -165,9 +166,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", attempts=" + attempts
-				+ ", quizzes=" + quizzes + ", quizRatings=" + quizRatings + ", questionRatings=" + questionRatings
-				+ "]";
+		return "User [id=" + id + ", username=" + username + ", role=" + role + "]";
 	}
+
 
 }

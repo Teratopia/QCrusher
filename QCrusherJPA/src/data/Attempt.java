@@ -89,12 +89,38 @@ public class Attempt {
 	public void setAttemptQuestions(Set<AttemptQuestion> attemptQuestions) {
 		this.attemptQuestions = attemptQuestions;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Attempt [id=" + id + ", dateTime=" + dateTime + ", user=" + user + ", quiz=" + quiz
-				+ ", attemptQuestions=" + attemptQuestions + "]";
+		return "Attempt [id=" + id + ", dateTime=" + dateTime + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Attempt other = (Attempt) obj;
+		if (dateTime == null) {
+			if (other.dateTime != null)
+				return false;
+		} else if (!dateTime.equals(other.dateTime))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
 }

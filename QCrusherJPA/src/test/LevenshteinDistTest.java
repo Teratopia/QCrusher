@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class LevenshteinDistTest {
 
-	public static int levenshteinDist(String s, String t) {
+	public int levenshteinDist(String s, String t) {
 		if (s.equals(t)) {
 			return 0;
 		}
@@ -45,7 +45,7 @@ public class LevenshteinDistTest {
 		return v1[t.length()];
 	}
 	
-	public static int minimum(int j, int k, int l){
+	public int minimum(int j, int k, int l){
 		if(j<k && j < l){ return j;}
 		if(k<j && k < l){ return k;}
 		if(l<j && l < k){ return l;}
@@ -53,13 +53,7 @@ public class LevenshteinDistTest {
 		
 	}
 	
-	public static void main(String[] args) {
-//		levTest();
-		percentTest();
-		
-	}
-	
-	public static void levTest(){
+	public void levTest(){
 		boolean gotIt = false;
 		Scanner s = new java.util.Scanner(System.in);
 		
@@ -78,27 +72,17 @@ public class LevenshteinDistTest {
 		s.close();
 	}
 	
-	public static void percentTest(){
+	public double levPercent(String input1, String input2){
 		
-		boolean gotIt = false;
-		Scanner s = new java.util.Scanner(System.in);
-		
-		while(gotIt==false){
-		System.out.println("Enter string one: ");
-		String input1 = s.nextLine();
-		System.out.println("Enter string two: ");
-		String input2 = s.nextLine();
 		int levenInt = levenshteinDist(input1, input2);
-		System.out.println("Levenshtein Distance: "+levenInt);
-		System.out.println();
+
 		double percent = (double)(input1.length()-levenInt)/input1.length();
-		System.out.println("Percent Match: "+percent);
-		System.out.println();
-		if(levenInt == 0){ gotIt = true;}
 		
+		if(percent < 0.0){
+			percent = 0.0;
 		}
 		
-		s.close();
+		return percent;
 		
 	}
 	

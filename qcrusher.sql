@@ -95,7 +95,7 @@ DROP TABLE IF EXISTS `attempt_question` ;
 
 CREATE TABLE IF NOT EXISTS `attempt_question` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `was_correct` INT NOT NULL,
+  `was_correct` TINYINT(1) NOT NULL,
   `question_id` INT NOT NULL,
   `attempt_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -225,6 +225,7 @@ USE `qcrusherdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (1, 'jbone', 'testpassword', 'ROLE_ADMIN');
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (2, 'ymenase', 'testpassword', 'ROLE_USER');
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (3, 'kennis', 'testpassword', 'ROLE_ADMIN');
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (4, 'Anonymous', 'anonymouspassword', 'ROLE_USER');
 
 COMMIT;
 

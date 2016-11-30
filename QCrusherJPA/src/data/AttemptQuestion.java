@@ -17,7 +17,7 @@ public class AttemptQuestion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="was_correct")
-	private int passFail;
+	private boolean passFail;
 	@ManyToOne
 	@JoinColumn(name="attempt_id")
 	private Attempt attempt;
@@ -27,18 +27,18 @@ public class AttemptQuestion {
 	
 	public AttemptQuestion(){}
 	
-	public AttemptQuestion(int passFail, Attempt attempt, QuestionObject questionObject) {
+	public AttemptQuestion(boolean passFail, Attempt attempt, QuestionObject questionObject) {
 		super();
 		this.passFail = passFail;
 		this.attempt = attempt;
 		this.questionObject = questionObject;
 	}
 
-	public int getPassFail() {
+	public boolean getPassFail() {
 		return passFail;
 	}
 	
-	public void setPassFail(int passFail) {
+	public void setPassFail(boolean passFail) {
 		this.passFail = passFail;
 	}
 

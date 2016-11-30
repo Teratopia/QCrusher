@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Quiz {
 	@OneToMany(mappedBy = "quiz")
 	private Set<QuizRating> quizRatings;
 	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER)
-	private List<QuestionObject> questionObjects;
+	private Set<QuestionObject> questionObjects;
 	
 	public Quiz(){}
 	
@@ -80,7 +81,7 @@ public class Quiz {
 	
 	public void addQuestionObject(QuestionObject qo){
 		if(questionObjects == null){
-			questionObjects = new ArrayList<QuestionObject>();
+			questionObjects = new TreeSet<QuestionObject>();
 		}
 		if(!questionObjects.contains(qo)){
 			questionObjects.add(qo);
@@ -147,10 +148,14 @@ public class Quiz {
 	}
 
 	public List<QuestionObject> getQuestionObjects() {
-		return questionObjects;
+		List<QuestionObject> lqo = new ArrayList<QuestionObject>();
+		for(QuestionObject qo : questionObjects){
+			lqo.add(qo);
+		}
+		return lqo;
 	}
 
-	public void setQuestionObjects(List<QuestionObject> questionObjects) {
+	public void setQuestionObjects(Set<QuestionObject> questionObjects) {
 		this.questionObjects = questionObjects;
 	}
 
