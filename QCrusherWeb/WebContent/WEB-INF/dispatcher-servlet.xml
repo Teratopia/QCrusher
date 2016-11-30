@@ -27,4 +27,5 @@
     <tx:annotation-driven transaction-manager="myTransactionManager" />
 
     <bean id="userDAO" class="dao.UserDAO"/> 
+    <bean id="quizDAO" class="dao.QuizDAO"/> 
 </beans>

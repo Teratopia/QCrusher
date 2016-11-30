@@ -11,9 +11,20 @@
 </head>
 <body>
 <%@include file="/WEB-INF/common/head.inc"%>
-	Welcome to the site! Note the difference in the navigation if you are logged in.
+	<p1>QCrusher</p1>
+	<p3>Go Quiz Yourself</p3>
+	
+	<form action = "takeQuiz">
+	Select quiz by Id:
+	<input type = "number" name = "quizNumber">
+	<input type = "submit" value = "Submit">
+	</form>
+	
 	<sec:authorize access="isAnonymous()">
-	<p>Try to go to <a href="<c:url value="/account"/>">/account</a> to see how the page is protected by login.</p>
+	<h6><a href = "signup">Create an Account</a></h6>
+	</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+	<h6><a href = "createQuiz">Create a Quiz</a></h6>
 	</sec:authorize>
 </body>
 </html>

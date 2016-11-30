@@ -20,11 +20,12 @@ public class MyUserDetailsService implements UserDetailsService{
 
     public UserDetails loadUserByUsername(String username){
     		// assuming that you have a User class that implements UserDetails
-
+    	System.out.println("in loadUserByName");
     		User u = (User) entityManager.createQuery("select u from User u where u.username = :un")
                     .setParameter("un", username)
                     .getSingleResult();
     		
+    		System.out.println(u.getId());
         return new CustomUserDetails(u);
 
     }

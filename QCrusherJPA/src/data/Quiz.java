@@ -1,11 +1,14 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +36,8 @@ public class Quiz {
 	private Set<Attempt> attempts;
 	@OneToMany(mappedBy = "quiz")
 	private Set<QuizRating> quizRatings;
-	@ManyToMany(mappedBy="quizzes")
-	private Set<QuestionObject> questionObjects;
+	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER)
+	private List<QuestionObject> questionObjects;
 	
 	public Quiz(){}
 	
@@ -77,7 +80,7 @@ public class Quiz {
 	
 	public void addQuestionObject(QuestionObject qo){
 		if(questionObjects == null){
-			questionObjects = new HashSet<QuestionObject>();
+			questionObjects = new ArrayList<QuestionObject>();
 		}
 		if(!questionObjects.contains(qo)){
 			questionObjects.add(qo);
@@ -143,11 +146,11 @@ public class Quiz {
 		this.quizRatings = quizRatings;
 	}
 
-	public Set<QuestionObject> getQuestionObjects() {
+	public List<QuestionObject> getQuestionObjects() {
 		return questionObjects;
 	}
 
-	public void setQuestionObjects(Set<QuestionObject> questionObjects) {
+	public void setQuestionObjects(List<QuestionObject> questionObjects) {
 		this.questionObjects = questionObjects;
 	}
 
