@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,11 +34,11 @@ public class Quiz {
 	@ManyToOne
 	@JoinColumn(name="creator_id")
 	private User user;
-	@OneToMany(mappedBy = "quiz")
+	@OneToMany(mappedBy = "quiz", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<Attempt> attempts;
-	@OneToMany(mappedBy = "quiz")
+	@OneToMany(mappedBy = "quiz", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuizRating> quizRatings;
-	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuestionObject> questionObjects;
 	
 	public Quiz(){}
@@ -99,9 +100,7 @@ public class Quiz {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -161,8 +160,41 @@ public class Quiz {
 
 	@Override
 	public String toString() {
-		return "Quiz [id=" + id + ", name=" + name + ", createDate=" + createDate + ", user=" + user + ", attempts="
-				+ attempts + ", quizRatings=" + quizRatings + ", questionObjects=" + questionObjects + "]";
+		return "Quiz [id=" + id + ", name=" + name + ", createDate=" + createDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quiz other = (Quiz) obj;
+		if (createDate == null) {
+			if (other.createDate != null)
+				return false;
+		} else if (!createDate.equals(other.createDate))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 	
 }

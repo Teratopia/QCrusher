@@ -3,7 +3,9 @@ package data;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +29,9 @@ public class QuestionObject {
 	@ManyToMany
 	@JoinTable(name = "quiz_question", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
 	private Set<Quiz> quizzes;
-	@OneToMany(mappedBy = "questionObject")
+	@OneToMany(mappedBy = "questionObject", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<AttemptQuestion> attemptQuestions;
-	@OneToMany(mappedBy = "questionObject")
+	@OneToMany(mappedBy = "questionObject", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuestionRating> questionRatings;
 
 	public QuestionObject() {
@@ -90,10 +92,6 @@ public class QuestionObject {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getQuestion() {
 		return question;
 	}
@@ -136,8 +134,7 @@ public class QuestionObject {
 
 	@Override
 	public String toString() {
-		return "QuestionObject [id=" + id + ", question=" + question + ", answer=" + answer + ", quizzes=" + quizzes
-				+ ", attemptQuestions=" + attemptQuestions + ", questionRatings=" + questionRatings + "]";
+		return "QuestionObject [id=" + id + ", question=" + question + ", answer=" + answer + "]";
 	}
 
 	@Override

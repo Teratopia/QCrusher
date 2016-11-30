@@ -40,10 +40,6 @@ public class QuizRating {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -62,8 +58,37 @@ public class QuizRating {
 
 	@Override
 	public String toString() {
-		return "QuizRating [id=" + id + ", rating=" + rating + ", feedback=" + feedback + ", user=" + user + ", quiz="
-				+ quiz + "]";
+		return "QuizRating [id=" + id + ", rating=" + rating + ", feedback=" + feedback + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((feedback == null) ? 0 : feedback.hashCode());
+		result = prime * result + id;
+		result = prime * result + rating;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QuizRating other = (QuizRating) obj;
+		if (feedback == null) {
+			if (other.feedback != null)
+				return false;
+		} else if (!feedback.equals(other.feedback))
+			return false;
+		if (id != other.id)
+			return false;
+		if (rating != other.rating)
+			return false;
+		return true;
+	}
 }

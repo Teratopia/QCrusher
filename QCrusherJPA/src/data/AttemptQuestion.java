@@ -46,10 +46,6 @@ public class AttemptQuestion {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Attempt getAttempt() {
 		return attempt;
 	}
@@ -68,8 +64,31 @@ public class AttemptQuestion {
 
 	@Override
 	public String toString() {
-		return "AttemptQuestion [id=" + id + ", passFail=" + passFail + ", attempt=" + attempt + ", questionObject="
-				+ questionObject + "]";
+		return "AttemptQuestion [id=" + id + ", passFail=" + passFail + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + (passFail ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AttemptQuestion other = (AttemptQuestion) obj;
+		if (id != other.id)
+			return false;
+		if (passFail != other.passFail)
+			return false;
+		return true;
+	}
 }
