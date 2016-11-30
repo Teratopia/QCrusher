@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.AttemptDAO;
+import dao.AttemptQuestionDAO;
 import dao.QuizDAO;
+import dao.UserDAO;
+import data.AttemptQuestion;
 import data.QuestionObject;
 import data.Quiz;
 import test.LevenshteinDistTest;
@@ -18,10 +24,16 @@ import test.LevenshteinDistTest;
 public class QuizController {
 	@Autowired
 	private QuizDAO quizDAO;
-
+	@Autowired
+	private AttemptDAO attemptDAO;
+	@Autowired
+	private AttemptQuestionDAO attemptQuestionDAO;
+	@Autowired
+	private UserDAO userDAO;
 	private LevenshteinDistTest ldt;
 	private String state;
 	private String username;
+	int attemptId;
 
 	@RequestMapping(path = "takeQuiz", method = RequestMethod.GET)
 	public ModelAndView takeQuiz(@RequestParam(name = "quizNumber") Integer quizNumber,
@@ -62,10 +74,10 @@ public class QuizController {
 			}
 		}
 		QuestionObject question = questions.get(questionNumber - 1);
-
 		switch (state) {
 		case "initialQuizLoad":
-			
+			attemptId = attemptDAO.createNewAttempt(userDAO.getUserByUserName(username).getId(), quizNumber);
+			System.out.println(attemptId);
 		case "nextQuestion":
 			
 			mv.setViewName("takeQuiz.jsp");
@@ -87,14 +99,33 @@ public class QuizController {
 			mv.addObject("percentMatch", percentMatch2);
 			mv.addObject("rightAnswer", question.getAnswer());
 			mv.addObject("userAnswer", answerText);
+			boolean wasCorrect = false;
 			if(percentMatch > .75){
 				mv.addObject("passFail", "Correct!");
+				wasCorrect = true;
 			}else{
 				mv.addObject("passFail", "Incorrect.");
+				wasCorrect = false;
 			}
+			attemptQuestionDAO.createNewAttemptQuestion(question.getId(), attemptId, wasCorrect);
 			break;
 		case "lastQuestion":
+			mv.setViewName("scoreQuiz.jsp");
 			
+			Set<AttemptQuestion> attemptSet = attemptDAO.getAttemptById(attemptId).getAttemptQuestions();
+			List<AttemptQuestion> attemptList = new ArrayList<AttemptQuestion>();
+			int count = 0;
+			for(AttemptQuestion aq : attemptSet){
+				attemptList.add(aq);
+				if(aq.getPassFail()){
+					count++;
+				}
+			}
+			Double percentCorrect = ((double)(count))/attemptList.size();
+			String percentCorrect2 = "%"+String.format("%.2f", percentCorrect*100);
+			mv.addObject("quiz", quiz);
+			mv.addObject("percentCorrect", percentCorrect2);
+			mv.addObject("answeredQuestions", attemptList);
 			//break;
 		case "error":
 		default:
