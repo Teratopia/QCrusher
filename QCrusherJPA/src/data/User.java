@@ -3,6 +3,7 @@ package data;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,13 +26,13 @@ public class User {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<Attempt> attempts;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<Quiz> quizzes;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuizRating> quizRatings;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuestionRating> questionRatings;
 	
 	public User(){}
@@ -169,5 +170,34 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", role=" + role + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		if (role != other.role)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 }

@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +32,7 @@ public class Attempt {
 	@ManyToOne
 	@JoinColumn(name="quiz_id")
 	private Quiz quiz;
-	@OneToMany(mappedBy = "attempt")
+	@OneToMany(mappedBy = "attempt", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<AttemptQuestion> attemptQuestions;
 	
 	public Attempt(){}
