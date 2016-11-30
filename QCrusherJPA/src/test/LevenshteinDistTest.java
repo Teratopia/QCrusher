@@ -76,10 +76,10 @@ public class LevenshteinDistTest {
 		
 		int levenInt = levenshteinDist(input1, input2);
 
-		double percent = (double)(input1.length()-levenInt)/input1.length();
+		double percent = ((double)(input1.length()-levenInt))/((double)input1.length());
 		
 		if(percent < 0.0){
-			percent = 0.0;
+			percent = percent*(-1.0);
 		}
 		
 		return percent;

@@ -126,7 +126,7 @@ public class QuizController {
 			mv.addObject("quiz", quiz);
 			mv.addObject("percentCorrect", percentCorrect2);
 			mv.addObject("answeredQuestions", attemptList);
-			//break;
+			break;
 		case "error":
 		default:
 			mv.setViewName("welcome.jsp");
