@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Profile</title>
 </head>
-<body>
+<body> 	
 	<%@include file="/WEB-INF/common/head.inc"%>
 	<%-- We are using the "principal" object (referenced by a JSTL variable of the same name).
 	This object is set upon login.--%>

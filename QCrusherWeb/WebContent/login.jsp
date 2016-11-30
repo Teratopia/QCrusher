@@ -49,6 +49,9 @@
 			<div class="error">Spring error message: ${SPRING_SECURITY_LAST_EXCEPTION.message}</div>
 			<div class="error">Controller error message: ${error}</div>
 		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
 
 		<%-- We use c:url to create url's that are relative to the webapp. Note 
 		the form's action; this is Spring's endpoint for security. No Controller is

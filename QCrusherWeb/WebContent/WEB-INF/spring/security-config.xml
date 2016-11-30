@@ -19,7 +19,7 @@
 	roles are "ROLE_ADMIN" and "ROLE_ANONYMOUS", which is a non-logged-in visitor
 	to the site. -->
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/account**" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/account**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
 		<form-login
 		    login-page="/login"
 		    default-target-url="/welcome"

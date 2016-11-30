@@ -1,6 +1,9 @@
 package controllers;
 
-import javax.persistence.NoResultException;
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,8 +37,8 @@ public class SignupController {
 		ModelAndView model = new ModelAndView();
 		if (userDAO.createNewUser(username, password)) {
 			model.setViewName("j_spring_security_check");
-			model.addObject("username", username);
-			model.addObject("password", password);
+			model.setViewName("login");
+			model.addObject("msg", "Account created! Please login with your new credentials.");
 		} else {
 			model.setViewName("signup");
 			model.addObject("error", "Username already exists!");
