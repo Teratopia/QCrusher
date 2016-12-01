@@ -12,9 +12,9 @@
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/logout"/>">Log Out</a></div>
-		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/account"/>">Account</a></div>
+		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/account?username=${principal.username}"/>">Account</a></div>
 	</sec:authorize>
 	<div style="float:right; margin-right: 10px;"><a href="<c:url value="/"/>">Home</a></div>
-	
+
 </div>
 <div style="clear:both;"></div>
