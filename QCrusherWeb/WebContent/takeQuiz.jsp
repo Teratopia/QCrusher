@@ -17,7 +17,6 @@
 	<form action="takeQuiz">
 		<input type="hidden" name="quizNumber" value="${quizNumber}" /> 
 		<input type="hidden" name="questionNumber" value="${questionNumber}" />
-		<input type = "hidden" name = "username" value = "${principal.username}"/>
 		<c:choose>
 			<c:when test="${empty percentMatch}">
 			

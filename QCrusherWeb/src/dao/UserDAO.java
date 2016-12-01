@@ -19,6 +19,7 @@ public class UserDAO{
 	}
 	
 	public User getUserByUserName(String username){
+		System.out.println("UserDAO.getUserByUserName: " + username);
 		return em.createQuery("select u from User u where u.username = ?1", User.class).setParameter(1, username).getSingleResult();
 	}
 	

@@ -53,7 +53,6 @@ public class QuizController {
 		if(username != null){
 			this.username = username;
 		}
-		System.out.println(username);
 		ModelAndView mv = new ModelAndView();
 
 		Quiz quiz = quizDAO.getQuizById(quizNumber);
@@ -99,10 +98,10 @@ public class QuizController {
 			if(questionRatingText != null){
 				System.out.println(username);
 				User user = new User();
-				if(username == null){
+				if(this.username == null){
 					user = userDAO.getUserByUserName("Anonymous");
 				}else{
-					user = userDAO.getUserByUserName(username);
+					user = userDAO.getUserByUserName(this.username);
 				}
 			int questionRating = Integer.parseInt(questionRatingText);
 			questionRatingDAO.createNewQuestionRating(questionRating, feedbackText, user, question);
@@ -161,17 +160,15 @@ public class QuizController {
 	
 	@RequestMapping(path = "rateQuiz", method = RequestMethod.GET)
 	public ModelAndView rateQuiz(@RequestParam(name = "quizNumber") Integer quizNumber,
-			@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "quizNumber") Integer quizRating,
 			@RequestParam(name = "feedbackText", required = false) String feedbackText) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("welcome.jsp");
 		User user = new User();
-		System.out.println(username);
 		if(username == null){
 			user = userDAO.getUserByUserName("Anonymous");
 		}else{
-			user = userDAO.getUserByUserName(username);
+			user = userDAO.getUserByUserName(this.username);
 		}
 		quizRatingDAO.createNewQuizRating(quizRating, feedbackText, user, quizDAO.getQuizById(quizNumber));
 		
