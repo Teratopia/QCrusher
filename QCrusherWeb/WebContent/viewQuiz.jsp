@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="principal" property="principal" />
+
 
 <html>
 <head>
@@ -25,6 +28,19 @@
 			${quiz.highScoringAttempt.dateTime }
 		</li>
 	</ul>
+
+	<form action="takeQuiz">
+	
+		<sec:authorize access="isAnonymous()">
+			<input type="hidden" name="username" value="Anonymous" />
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="username" value="${principal.username}" />
+		</sec:authorize>
+		
+		<input type="hidden" name="quizNumber" value="${quiz.id}" /> 
+		<input type="submit" value="Take Quiz" />
+	</form>
 
 	<c:if test="${not empty allowedToViewQuestions}">
 		<h3>You ${createdOrAttempted} this quiz.</h3>

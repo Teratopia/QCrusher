@@ -23,8 +23,6 @@ public class AccountController {
 	@Autowired
 	private UserDAO userDAO;
 	
-	
-	
 	@RequestMapping(path="/account", method=RequestMethod.GET)
 	public ModelAndView profile(@RequestParam(name = "username", required = false) String username) {
 		System.out.println(username);
