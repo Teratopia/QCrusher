@@ -15,6 +15,12 @@ public class LevenshteinDistTest {
 			s = s1;
 			t = t1;
 		}
+		if(s.equals(null)){
+			s = "";
+		}
+		if(t.equals(null)){
+			t= "";
+		}
 		if (s.equals(t)) {
 			return 0;
 		}
