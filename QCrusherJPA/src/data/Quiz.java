@@ -197,4 +197,54 @@ public class Quiz {
 		return true;
 	}
 	
+	//Custom helper methods
+	public double getAverageScore(){
+		if (attempts.size()==0){
+			return 0.0;
+		}
+		//get the average score for all attempts
+		double sum = 0.0;
+		for (Attempt a : attempts){
+			sum += a.getScore();
+		}
+		return sum / attempts.size();
+	}
+	
+	public double getHighScore(){
+		double highest = 0.0;
+		for (Attempt a : attempts){
+			highest = Math.max(a.getScore(), highest);
+		}
+		return highest;
+	}
+	
+	public Attempt getHighScoringAttempt(){
+		Attempt highestAttempt = null;
+		double highest = 0.0;
+		for (Attempt a : attempts){
+			highest = Math.max(a.getScore(), highest);
+			highestAttempt = a;
+		}
+		return highestAttempt;
+	}
+	
+	public Integer getUniqueAttempts(){
+		Set<Integer> ids = new HashSet<>();
+		for (Attempt a : attempts){
+			ids.add(a.getUser().getId());
+		}
+		return ids.size();
+	}
+	
+	public boolean hasAttempted(User u){
+		boolean returnBool = false;
+		for (Attempt a : attempts){
+			if (a.getUser().equals(u)){
+				returnBool = true;
+				break;
+			}		
+		}
+		return returnBool;
+	}
+	
 }

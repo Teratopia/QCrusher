@@ -124,5 +124,17 @@ public class Attempt {
 			return false;
 		return true;
 	}
+	
+	//helper methods
+	public double getScore(){
+		if (attemptQuestions.size()==0){
+			return 0.0;
+		}
+		double sum = 0.0;
+		for (AttemptQuestion aq : attemptQuestions){
+			if (aq.getPassFail()) sum ++;
+		}
+		return 100 * sum / attemptQuestions.size();
+	}
 
 }
