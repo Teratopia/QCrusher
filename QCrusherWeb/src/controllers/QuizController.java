@@ -153,7 +153,8 @@ public class QuizController {
 			break;
 		case "error":
 		default:
-			mv.setViewName("welcome");
+			mv.setViewName("welcome.jsp");
+			mv.addObject("quizzes", quizDAO.getAllQuizzes());
 			mv.addObject("error", "Quiz does not exist!");
 		}
 
@@ -173,7 +174,7 @@ public class QuizController {
 			user = userDAO.getUserByUserName(this.username);
 		}
 		quizRatingDAO.createNewQuizRating(quizRating, feedbackText, user, quizDAO.getQuizById(quizNumber));
-
+		mv.addObject("quizzes", quizDAO.getAllQuizzes());
 		return mv;
 	}
 
