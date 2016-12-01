@@ -13,11 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.AttemptDAO;
 import dao.AttemptQuestionDAO;
+import dao.QuestionRatingDAO;
 import dao.QuizDAO;
+import dao.QuizRatingDAO;
 import dao.UserDAO;
 import data.AttemptQuestion;
 import data.QuestionObject;
 import data.Quiz;
+import data.User;
 import test.LevenshteinDistTest;
 
 @Controller
@@ -30,6 +33,10 @@ public class QuizController {
 	private AttemptQuestionDAO attemptQuestionDAO;
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private QuestionRatingDAO questionRatingDAO;
+	@Autowired
+	private QuizRatingDAO quizRatingDAO;
 	private LevenshteinDistTest ldt;
 	private String state;
 	private String username;
@@ -39,11 +46,14 @@ public class QuizController {
 	public ModelAndView takeQuiz(@RequestParam(name = "quizNumber") Integer quizNumber,
 			@RequestParam(name = "answerText", required = false) String answerText,
 			@RequestParam(name = "questionNumber", required = false) Integer questionNumber,
-			@RequestParam(name = "username", required = false) String username) {
+			@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name = "questionRating", required = false) String questionRatingText,
+			@RequestParam(name = "feedbackText", required = false) String feedbackText) {
 		
 		if(username != null){
 			this.username = username;
 		}
+		System.out.println(username);
 		ModelAndView mv = new ModelAndView();
 
 		Quiz quiz = quizDAO.getQuizById(quizNumber);
@@ -85,6 +95,18 @@ public class QuizController {
 			mv.addObject("quizNumber", quizNumber);
 			mv.addObject("questionNumber", questionNumber);
 			mv.addObject("question", question);
+			
+			if(questionRatingText != null){
+				System.out.println(username);
+				User user = new User();
+				if(username == null){
+					user = userDAO.getUserByUserName("Anonymous");
+				}else{
+					user = userDAO.getUserByUserName(username);
+				}
+			int questionRating = Integer.parseInt(questionRatingText);
+			questionRatingDAO.createNewQuestionRating(questionRating, feedbackText, user, question);
+			}
 			break;
 		case "submittingForGrade":
 
@@ -108,6 +130,7 @@ public class QuizController {
 				wasCorrect = false;
 			}
 			attemptQuestionDAO.createNewAttemptQuestion(question.getId(), attemptId, wasCorrect);
+			
 			break;
 		case "lastQuestion":
 			mv.setViewName("scoreQuiz.jsp");
@@ -133,6 +156,25 @@ public class QuizController {
 			mv.addObject("error", "Quiz does not exist!");
 		}
 
+		return mv;
+	}
+	
+	@RequestMapping(path = "rateQuiz", method = RequestMethod.GET)
+	public ModelAndView rateQuiz(@RequestParam(name = "quizNumber") Integer quizNumber,
+			@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name = "quizNumber") Integer quizRating,
+			@RequestParam(name = "feedbackText", required = false) String feedbackText) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("welcome.jsp");
+		User user = new User();
+		System.out.println(username);
+		if(username == null){
+			user = userDAO.getUserByUserName("Anonymous");
+		}else{
+			user = userDAO.getUserByUserName(username);
+		}
+		quizRatingDAO.createNewQuizRating(quizRating, feedbackText, user, quizDAO.getQuizById(quizNumber));
+		
 		return mv;
 	}
 

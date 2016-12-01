@@ -17,6 +17,7 @@
 	<form action="takeQuiz">
 		<input type="hidden" name="quizNumber" value="${quizNumber}" /> 
 		<input type="hidden" name="questionNumber" value="${questionNumber}" />
+		<input type = "hidden" name = "username" value = "${principal.username}"/>
 		<c:choose>
 			<c:when test="${empty percentMatch}">
 			
@@ -30,6 +31,17 @@
 				<h3>You Answered: ${userAnswer}</h3>
 				<h3>Correct Answer: ${rightAnswer}</h3>
 				<h3>Percent Match: ${percentMatch}</h3>
+				<hr>
+				<h3>How would you rate this question?<select name="questionRating">
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+					</select></h3>
+				<h3>Any feedback for the question writer?</h3>
+				<input type="text" name="feedbackText" />
 
 				<input type="submit" value="Continue" />
 			</c:when>

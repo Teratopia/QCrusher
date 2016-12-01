@@ -21,6 +21,23 @@
 </ul>
 
 <h3>Percent Correct: ${percentCorrect}</h3>
+<hr>
+<form action = "rateQuiz">
+<h3>How would you rate this quiz?<select name="quizRating">
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+					</select></h3>
+				<h3>Any feedback for the quiz writer?</h3>
+				<input type="text" name="feedbackText" />
+				<input type="hidden" name="quizNumber" value="${quiz.id}"/>
+				<input type = "hidden" name = "username" value = "${principal.username}"/>
+				<input type="submit" value="Submit" />
+
+</form>
 
 </body>
 </html>

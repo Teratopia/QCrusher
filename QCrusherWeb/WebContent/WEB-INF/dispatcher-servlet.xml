@@ -30,4 +30,6 @@
     <bean id="quizDAO" class="dao.QuizDAO"/> 
     <bean id="attemptDAO" class="dao.AttemptDAO"/> 
     <bean id="attemptQuestionDAO" class="dao.AttemptQuestionDAO"/> 
+    <bean id="questionRatingDAO" class="dao.QuestionRatingDAO"/> 
+    <bean id="quizRatingDAO" class="dao.QuizRatingDAO"/> 
 </beans>
