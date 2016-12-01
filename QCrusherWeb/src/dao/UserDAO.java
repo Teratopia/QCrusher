@@ -19,16 +19,20 @@ public class UserDAO{
 	}
 	
 	public User getUserByUserName(String username){
-		System.out.println("UserDAO.getUserByUserName: " + username);
-		return em.createQuery("select u from User u where u.username = ?1", User.class).setParameter(1, username).getSingleResult();
+		User u = null;
+		try {
+			u = em.createQuery("select u from User u where u.username = ?1", User.class).setParameter(1, username).getSingleResult();
+		} catch (NoResultException nre){
+			// if no result, User returned is null
+		}
+		return u;
 	}
 	
 	public boolean createNewUser(String username, String password){
-		User u;
-		try {
-			u = getUserByUserName(username);
-			return false;
-		} catch (NoResultException nre){
+		User u = getUserByUserName(username);
+		if (u != null) {
+			return false; //username already exists
+		} else {
 			u = new User();
 			u.setUsername(username);
 			u.setPassword(password);

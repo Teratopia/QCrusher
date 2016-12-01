@@ -15,16 +15,19 @@
 	<p1>QCrusher</p1><br>
 	<p3><em>Go Quiz Yourself</em></p3>
 	
-	<form action = "takeQuiz">
+	<form action = "viewQuiz">
 	<sec:authorize access="isAnonymous()">
 		<input type = "hidden" name = "username" value = "Anonymous"/>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 		<input type = "hidden" name = "username" value = "${principal.username}"/>
 	</sec:authorize>
-	Select quiz by Id:
-	<input type = "number" name = "quizNumber">
-	<input type = "submit" value = "Submit">
+		Select Quiz: 
+		<select name="quizID">
+			<c:forEach var = "quiz" items = "${quizzes}">
+				<option value="${quiz.id}"> ${quiz.name} by ${quiz.user.username} </option>
+			</c:forEach>
+		</select> <input type = "submit" value = "Select">
 	</form>
 	
 	<sec:authorize access="isAnonymous()">

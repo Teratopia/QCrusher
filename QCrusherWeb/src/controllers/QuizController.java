@@ -86,6 +86,7 @@ public class QuizController {
 		QuestionObject question = questions.get(questionNumber - 1);
 		switch (state) {
 		case "initialQuizLoad":
+			System.out.println("initial Quiz load, user is " + username);
 			attemptId = attemptDAO.createNewAttempt(userDAO.getUserByUserName(username).getId(), quizNumber);
 			System.out.println(attemptId);
 		case "nextQuestion":
@@ -152,7 +153,7 @@ public class QuizController {
 			break;
 		case "error":
 		default:
-			mv.setViewName("welcome.jsp");
+			mv.setViewName("welcome");
 			mv.addObject("error", "Quiz does not exist!");
 		}
 
