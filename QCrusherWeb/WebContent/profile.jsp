@@ -13,6 +13,22 @@
 	<%@include file="/WEB-INF/common/head.inc"%>
 	<%-- We are using the "principal" object (referenced by a JSTL variable of the same name).
 	This object is set upon login.--%>
-	<h3>Username in Spring Security Principal: <c:out value="${principal.username}"/></h3>
+	<%-- <h3>Username in Spring Security Principal: <c:out value="${principal.username}"/></h3> --%>
+	
+	<h1>${username}'s Profile Page</h1>
+	<h3>Your Quiz Taking Statistics:</h3>
+	<h6>Total correct question attempts: ${correctAttempts.size()}</h6>
+	<h6>Total incorrect question attempts: ${incorrectAttempts.size()}</h6>
+	<h6>Total average: ${totalAverage}</h6>
+	<h3>Your Quiz Building Statistics:</h3>
+	<h6>Number of Quizzes Created: ${numQuizzesCreated}</h6>
+	<h6>Total number of incorrect guesses to your questions: ${numStumpQuestions}</h6>
+	<h6>Total number of correct guesses to your questions: ${numNonStumpQuestions}</h6>
+	<h6>Stump-Rate: ${stumpRate}</h6>
+	
+	<form action="viewQuiz" method="GET"> 
+		<input type="submit" value="View My Quizzes">
+	</form>
+	
 </body>
 </html>
