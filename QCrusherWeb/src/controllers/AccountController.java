@@ -31,6 +31,7 @@ public class AccountController {
 		System.out.println(username);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile.jsp");
+		System.out.println(username);
 		
 		User user = userDAO.getUserByUserName(username);
 		Set<Attempt> attempts = user.getAttempts();
@@ -86,9 +87,20 @@ public class AccountController {
 	public ModelAndView deleteUser(@RequestParam(name = "username", required = false) String username) {
 		ModelAndView mv = new ModelAndView();
 		userDAO.deleteUser(username);
-		mv.setViewName("welcome.jsp");
-		mv.addObject("quizzes", quizDAO.getAllQuizzes());
+		mv.setViewName("redirect:/logout");
+		//mv.addObject("quizzes", quizDAO.getAllQuizzes());
 		return mv;
+	}
+	
+	@RequestMapping(path = "deleteQuiz", method = RequestMethod.GET)
+	public ModelAndView deleteQuiz(@RequestParam(name = "quizId", required = false) String quizIdString,
+			@RequestParam(name = "username", required = false) String username) {
+		System.out.println(username);
+		System.out.println(quizIdString);
+		int quizId = Integer.parseInt(quizIdString);
+		quizDAO.deleteQuiz(quizId);
+		
+		return profile(username);
 	}
 	
 }

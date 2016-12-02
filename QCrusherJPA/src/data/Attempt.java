@@ -29,10 +29,10 @@ public class Attempt {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="quiz_id")
 	private Quiz quiz;
-	@OneToMany(mappedBy = "attempt", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy = "attempt", fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Set<AttemptQuestion> attemptQuestions;
 	
 	public Attempt(){}

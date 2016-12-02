@@ -40,7 +40,7 @@ public class Quiz {
 	private Set<Attempt> attempts;
 	@OneToMany(mappedBy = "quiz", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuizRating> quizRatings;
-	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER,  cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Set<QuestionObject> questionObjects;
 	
 	public Quiz(){}

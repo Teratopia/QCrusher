@@ -242,19 +242,10 @@ public class QuizController {
 			@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "question", required = false) String question,
 			@RequestParam(name = "answer", required = false) String answer) {
-		int quizId = Integer.parseInt(quizIdString);
-		qoDAO.createNewQuestionObject(question, answer, quizId);
+		int quizID = Integer.parseInt(quizIdString);
+		qoDAO.createNewQuestionObject(question, answer, quizID);
 		
-		return viewQuiz(quizId, username);
-	}
-	
-	@RequestMapping(path = "addQuestionToExistingQuiz", method = RequestMethod.GET)
-	public ModelAndView addQuestionToExistingQuiz(@RequestParam(name = "quizId", required = false) String quizIdString,
-			@RequestParam(name = "username", required = false) String username) {
-		int quizId = Integer.parseInt(quizIdString);
-		AccountController ac = new AccountController();
-		quizDAO.deleteQuiz(quizId);
-		return ac.profile(username);
+		return viewQuiz(quizID, username);
 	}
 
 }

@@ -59,12 +59,16 @@
 			</c:forEach>
 			<li><form action = "addQuestionToExistingQuiz">
 		<input type = "hidden" name = "quizId" value = "${quiz.id}">
-		<input type = "hidden" name = "username" value = "${username}">
+		<input type = "hidden" name = "username" value = "${quiz.user.username}">
 		Question: <input type = "text" name = "question"/><br>
 		Answer: <input type = "text" name = "answer"/>
 		<input type = "submit" value = "Add Question"/>
 		</form></li>
 		</ol><br>
+	<form action = "account">
+		<input type="hidden" name="username" value="${quiz.user.username}" />
+		<input type = "submit" value = "Save Quiz"/>
+	</form>
 		<h5>Ratings:</h5>
 		<ol>
 			<c:forEach var="rating" items="${quiz.quizRatings}">
@@ -76,11 +80,11 @@
 		<input type="hidden" name="username" value="${quiz.user.username}" />
 		<input type = "submit" value = "Back to Profile"/>
 	</form>
-	<form action = "deleteQuiz">
+<%-- 	<form action = "deleteQuiz">
 		<input type = "hidden" name = "quizId" value = "${quiz.id}">
 		<input type="hidden" name="username" value="${quiz.user.username}" />
 		<input type = "submit" value = "Delete Quiz"/>
-	</form>
+	</form> --%>
 	</c:if>
 </body>
 </html>

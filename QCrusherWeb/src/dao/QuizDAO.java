@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import data.Attempt;
 import data.QuestionObject;
 import data.Quiz;
 
@@ -56,7 +57,18 @@ public class QuizDAO {
 	
 	public void deleteQuiz(int quizId){
 		Quiz quiz = em.find(Quiz.class, quizId);
+		System.out.println(quiz.getId());
+		quiz.setName("test");
+		for(QuestionObject q : quiz.getQuestionObjects()){
+			q.getQuizzes().remove(quiz);
+			em.persist(q);
+		}
+
+		
 		em.remove(quiz);
+		System.err.println(em.find(Quiz.class, quizId));
+		System.err.println(quiz);
+		
 	}
 
 }
