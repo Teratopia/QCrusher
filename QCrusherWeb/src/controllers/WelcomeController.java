@@ -18,13 +18,17 @@ public class WelcomeController {
 
 	@RequestMapping(path={"/", "/welcome"}, method=RequestMethod.GET)
 	public ModelAndView welcome(){
+		System.out.println("in welcome controller");
 		if (userDAO.getUserByUserName("Anonymous") == null){
 			System.out.println("creating Anonymous");
 			userDAO.createNewUser("Anonymous", "testpassword");
 		}
+		System.out.println("2");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("welcome.jsp");
+		System.out.println("3");
 		mv.addObject("quizzes", quizDAO.getAllQuizzes());
+		System.out.println("4");
 		return mv;
 	}
 }

@@ -1,6 +1,5 @@
 package dao;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,21 +14,30 @@ import data.Quiz;
 
 @Transactional
 public class QuizDAO {
-	
+
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 	@Autowired
 	UserDAO userDAO;
-	
-	public Quiz getQuizById(int id){
+
+	public Quiz getQuizById(int id) {
 		return em.find(Quiz.class, id);
 	}
-	
-	public List<Quiz> getAllQuizzes(){
-		return em.createQuery("SELECT q FROM Quiz q").getResultList();
+
+	public List<Quiz> getAllQuizzes() {
+		System.out.println("IN DAO METHOD");
+		List<Quiz> results = null;
+		try {
+			System.out.println("ABOUT TO QUERY");
+			results = (List<Quiz>) em.createQuery("SELECT q FROM Quiz q").getResultList();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		System.out.println("ABOUT TO RETURN");
+		return results;
 	}
-	
-	public int createNewQuiz(String quizName, String username){
+
+	public int createNewQuiz(String quizName, String username) {
 		Quiz q = new Quiz();
 		Date d = new Date();
 		q.setName(quizName);
@@ -38,11 +46,11 @@ public class QuizDAO {
 		em.persist(q);
 		return q.getId();
 	}
-	
-	public void removeQuestionObjectFromQuiz(Quiz quiz, QuestionObject qo){
+
+	public void removeQuestionObjectFromQuiz(Quiz quiz, QuestionObject qo) {
 		quiz.removeQuestionObject(qo);
 		System.out.println("test");
-//		em.persist(quiz);
+		// em.persist(quiz);
 		em.merge(qo);
 	}
 	
