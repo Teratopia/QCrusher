@@ -33,7 +33,9 @@ public class QuestionObjectDAO {
 		qo.setQuizzes(new LinkedHashSet<Quiz>());
 		qo.setQuestionRatings(new LinkedHashSet<QuestionRating>());
 		qo.setAttemptQuestions(new LinkedHashSet<AttemptQuestion>());
+		
 		qo.addQuiz(em.find(Quiz.class, id));
+		
 		em.persist(qo);
 		return qo.getId();
 	}

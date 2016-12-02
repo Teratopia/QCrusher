@@ -52,8 +52,7 @@ public class CreateQuizController {
 		mv.setViewName("createQuiz.jsp");
 		int quizId = Integer.parseInt(quizIdString);
 		Quiz quiz = quizDAO.getQuizById(quizId);
-		int qoID = qoDAO.createNewQuestionObject(question, answer, quizId);
-		
+		qoDAO.createNewQuestionObject(question, answer, quizId);
 		
 		mv.addObject("quiz", quiz);
 		mv.addObject("username", username);

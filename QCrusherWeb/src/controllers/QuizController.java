@@ -13,14 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.AttemptDAO;
 import dao.AttemptQuestionDAO;
+import dao.QuestionObjectDAO;
 import dao.QuestionRatingDAO;
 import dao.QuizDAO;
 import dao.QuizRatingDAO;
 import dao.UserDAO;
-import data.Attempt;
 import data.AttemptQuestion;
 import data.QuestionObject;
 import data.Quiz;
+import data.QuizRating;
 import data.User;
 import test.LevenshteinDistTest;
 
@@ -38,6 +39,8 @@ public class QuizController {
 	private QuestionRatingDAO questionRatingDAO;
 	@Autowired
 	private QuizRatingDAO quizRatingDAO;
+	@Autowired
+	private QuestionObjectDAO qoDAO;
 	private LevenshteinDistTest ldt;
 	private String state;
 	private String username;
@@ -192,21 +195,46 @@ public class QuizController {
 		if (username != null && username != "Anonymous") {
 			User u = userDAO.getUserByUserName(username);
 			// view is allowed if user either created or has attempted the quiz
-			if (quiz.getUser().equals(u)){
+			if (quiz.getUser().equals(u)) {
 				createdOrAttempted = "created";
 				allowedToViewQuestions = true;
-			} else if (quiz.hasAttempted(u)){
+			} else if (quiz.hasAttempted(u)) {
 				createdOrAttempted = "attempted";
-				allowedToViewQuestions = true ;
+				allowedToViewQuestions = true;
+				if(u.getUsername().equals("Anonymous")){
+					allowedToViewQuestions = false;
+				}
 			}
 		}
 
 		mv.addObject("quiz", quiz);
-		if (allowedToViewQuestions){
-			mv.addObject("allowedToViewQuestions", "true"); //will be null if false
+		if (allowedToViewQuestions) {
+			mv.addObject("allowedToViewQuestions", "true"); // will be null if
+															// false
 			mv.addObject("createdOrAttempted", createdOrAttempted);
+			int addRatings = 0;
+			if (quiz.getQuizRatings().size() > 0) {
+				for (QuizRating qr : quiz.getQuizRatings()) {
+					addRatings += qr.getRating();
+				}
+				String averageRating = String.format("%.2f", ((double) addRatings) / quiz.getQuizRatings().size());
+				mv.addObject("averageRating", averageRating);
+			}
 		}
+
 		return mv;
+	}
+	
+	@RequestMapping(path = "removeQuestion", method = RequestMethod.GET)
+	public ModelAndView removeQuestionFromQuiz(@RequestParam(name = "quizID") String quizID,
+			@RequestParam(name = "questionId") String questionId,
+			@RequestParam(name = "username") String username) {
+		Integer quizId = Integer.parseInt(quizID);
+		Quiz quiz = quizDAO.getQuizById(quizId);
+		QuestionObject qo = qoDAO.getQuestionObjectById(Integer.parseInt(questionId));
+		quiz.removeQuestionObject(qo);
+		quizDAO.removeQuestionObjectFromQuiz(quiz, qo);
+		return viewQuiz(quizId, username);
 	}
 
 }

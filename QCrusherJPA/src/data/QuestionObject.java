@@ -3,6 +3,8 @@ package data;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +28,7 @@ public class QuestionObject {
 	private String answer;
 	// private String category; //Enum?
 	// private int creatorId;
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	@JoinTable(name = "quiz_question", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
 	private Set<Quiz> quizzes;
 	@OneToMany(mappedBy = "questionObject", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
@@ -54,8 +56,9 @@ public class QuestionObject {
 	}
 
 	public void removeQuiz(Quiz quiz) {
-		if (quizzes != null) {
+		if (quizzes.contains(quiz)) {
 			quizzes.remove(quiz);
+			quiz.removeQuestionObject(this);
 		}
 	}
 

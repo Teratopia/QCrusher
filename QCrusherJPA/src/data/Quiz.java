@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +40,7 @@ public class Quiz {
 	private Set<Attempt> attempts;
 	@OneToMany(mappedBy = "quiz", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Set<QuizRating> quizRatings;
-	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToMany(mappedBy="quizzes", fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	private Set<QuestionObject> questionObjects;
 	
 	public Quiz(){}
@@ -97,6 +99,7 @@ public class Quiz {
 	}
 	
 	public void removeQuestionObject(QuestionObject qo){
+		if(questionObjects.contains(qo))
 		qo.removeQuiz(this);
 		questionObjects.remove(qo);
 		
