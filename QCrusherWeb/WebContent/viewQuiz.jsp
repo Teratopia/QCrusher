@@ -57,6 +57,13 @@
 				</form>
 				</li>
 			</c:forEach>
+			<li><form action = "addQuestionToExistingQuiz">
+		<input type = "hidden" name = "quizId" value = "${quiz.id}">
+		<input type = "hidden" name = "username" value = "${username}">
+		Question: <input type = "text" name = "question"/><br>
+		Answer: <input type = "text" name = "answer"/>
+		<input type = "submit" value = "Add Question"/>
+		</form></li>
 		</ol><br>
 		<h5>Ratings:</h5>
 		<ol>
@@ -65,10 +72,15 @@
 			</c:forEach>
 		</ol>
 		<h6>Average Rating: ${averageRating}/10</h6>
-	</c:if>
 	<form action = "account">
 		<input type="hidden" name="username" value="${quiz.user.username}" />
 		<input type = "submit" value = "Back to Profile"/>
 	</form>
+	<form action = "deleteQuiz">
+		<input type = "hidden" name = "quizId" value = "${quiz.id}">
+		<input type="hidden" name="username" value="${quiz.user.username}" />
+		<input type = "submit" value = "Delete Quiz"/>
+	</form>
+	</c:if>
 </body>
 </html>

@@ -41,6 +41,10 @@
 		<input type = "hidden" name = "username" value = "${username}"/>
 		<input type = "submit" value = "Create New Quiz"/>
 	</form>
+	<form action = "deleteUser" method = "GET">
+		<input type = "hidden" name = "username" value = "${username}"/>
+		<input style="color:red;" type = "submit" value = "Delete My Account"/>
+	</form>
 	
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.QuizDAO;
 import dao.UserDAO;
 import data.Attempt;
 import data.AttemptQuestion;
@@ -22,6 +23,8 @@ import data.User;
 public class AccountController {
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private QuizDAO quizDAO;
 	
 	@RequestMapping(path="/account", method=RequestMethod.GET)
 	public ModelAndView profile(@RequestParam(name = "username", required = false) String username) {
@@ -77,6 +80,14 @@ public class AccountController {
 		mv.addObject("numNonStumpQuestions", countNonStumperQuestions);
 		mv.addObject("quizzes", quizzes);
 		
+		return mv;
+	}
+	@RequestMapping(path="deleteUser", method=RequestMethod.GET)
+	public ModelAndView deleteUser(@RequestParam(name = "username", required = false) String username) {
+		ModelAndView mv = new ModelAndView();
+		userDAO.deleteUser(username);
+		mv.setViewName("welcome.jsp");
+		mv.addObject("quizzes", quizDAO.getAllQuizzes());
 		return mv;
 	}
 	
