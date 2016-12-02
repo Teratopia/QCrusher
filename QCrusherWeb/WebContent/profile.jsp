@@ -40,12 +40,19 @@
 			</c:forEach>
 		</select> 
 		<input type = "hidden" name = "username" value = "${username}"/>
-		<input type = "submit" value = "View Quiz"/>
+		<input type = "submit" class = "btn btn-info" value = "View Quiz"/>
 	</form>
 	<form action = "createQuiz" method = "GET">
 		<input type = "hidden" name = "username" value = "${username}"/>
-		<input type = "submit" value = "Create New Quiz"/>
+		<input type = "submit" class = "btn btn-success" value = "Create New Quiz"/>
 	</form>
+	<br>
+	<br>
+	<form action = "deleteUser" method = "GET">
+		<input type = "hidden" name = "username" value = "${username}"/>
+		<input type = "submit" class = "btn btn-danger" value = "Delete My Account"/>
+	</form>
+	
 </div>
 </body>
 </html>

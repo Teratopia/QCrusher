@@ -53,5 +53,10 @@ public class QuizDAO {
 		// em.persist(quiz);
 		em.merge(qo);
 	}
+	
+	public void deleteQuiz(int quizId){
+		Quiz quiz = em.find(Quiz.class, quizId);
+		em.remove(quiz);
+	}
 
 }

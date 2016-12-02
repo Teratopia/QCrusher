@@ -41,4 +41,9 @@ public class UserDAO{
 			return true;
 		}
 	}
+	
+	public void deleteUser(String username){
+		User user = getUserByUserName(username);
+		em.remove(user);
+	}
 }

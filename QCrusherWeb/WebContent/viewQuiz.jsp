@@ -45,7 +45,7 @@
 		</sec:authorize>
 		
 		<input type="hidden" name="quizNumber" value="${quiz.id}" /> 
-		<input type="submit" value="Take Quiz" />
+		<input type="submit" class="btn btn-primary" value="Take Quiz" />
 	</form>
 
 	<c:if test="${not empty allowedToViewQuestions}">
@@ -58,10 +58,17 @@
 				<input type="hidden" name="questionId" value="${question.id}" />
 				<input type="hidden" name="quizID" value="${quiz.id}" />
 				<input type="hidden" name="username" value="${quiz.user.username}" />
-				<input type="submit" value="Remove Question"/>
+				<input type="submit" class="btn btn-default" value="Remove Question"/>
 				</form>
 				</li>
 			</c:forEach>
+			<li><form action = "addQuestionToExistingQuiz">
+		<input type = "hidden" name = "quizId" value = "${quiz.id}">
+		<input type = "hidden" name = "username" value = "${username}">
+		Question: <input type = "text" name = "question"/><br>
+		Answer: <input type = "text" name = "answer"/>
+		<input type = "submit" class="btn btn-default" value = "Add Question"/>
+		</form></li>
 		</ol><br>
 		<h5>Ratings:</h5>
 		<ol>
@@ -70,11 +77,17 @@
 			</c:forEach>
 		</ol>
 		<h6>Average Rating: ${averageRating}/10</h6>
-	</c:if>
 	<form action = "account">
 		<input type="hidden" name="username" value="${quiz.user.username}" />
-		<input type = "submit" value = "Back to Profile"/>
+		<input type = "submit" class="btn btn-default" value = "Back to Profile"/>
 	</form>
+
+	<form action = "deleteQuiz">
+		<input type = "hidden" name = "quizId" value = "${quiz.id}">
+		<input type="hidden" name="username" value="${quiz.user.username}" />
+		<input type = "submit" class="btn btn-danger" value = "Delete Quiz"/>
+	</form>
+	</c:if>
 </div>
 </body>
 </html>

@@ -26,8 +26,8 @@
 		</c:otherwise>
 	</c:choose>
     ${attemptq.questionObject.question} <br>
-	Desired Answer: ${attemptq.questionObject.answer}.<br>
-	Answered Correctly: ${attemptq.passFail}.</div>
+	Desired Answer: ${attemptq.questionObject.answer}<br>
+	Answered Correctly: ${attemptq.passFail}</div>
 </c:forEach>
 
 <h3>Percent Correct: ${percentCorrect}</h3>
@@ -50,7 +50,7 @@
 				<input type="text" name="feedbackText" />
 				<input type="hidden" name="quizNumber" value="${quiz.id}"/>
 				<input type = "hidden" name = "username" value = "${principal.username}"/>
-				<input type="submit" value="Submit" />
+				<input type="submit" class="btn btn-primary" value="Submit" />
 
 </form>
 

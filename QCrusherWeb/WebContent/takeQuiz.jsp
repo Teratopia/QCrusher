@@ -28,7 +28,7 @@
 			<c:when test="${empty percentMatch}">
 			
 				<input type="text" name="answerText" />
-				<input type="submit" name="Submit" />
+				<input type="submit" class="btn btn-primary" name="Submit" />
 				
 			</c:when>
 			<c:when test="${not empty percentMatch}">
@@ -62,7 +62,7 @@
 				<h5>Any feedback for the question writer?</h5>
 				<input type="text" name="feedbackText" />
 
-				<input type="submit" value="Continue" />
+				<input type="submit" class="btn btn-primary" value="Continue" />
 				
 			</c:when>
 		</c:choose>

@@ -32,7 +32,7 @@
 			<c:forEach var = "quiz" items = "${quizzes}">
 				<option value="${quiz.id}"> ${quiz.name} by ${quiz.user.username} </option>
 			</c:forEach>
-		</select> <input type = "submit" value = "Select">
+		</select> <input type = "submit" class="btn btn-primary" value = "Select">
 	</form>
 	
 	<sec:authorize access="isAnonymous()">
