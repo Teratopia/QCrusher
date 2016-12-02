@@ -19,15 +19,27 @@
 	<h3>Your Quiz Taking Statistics:</h3>
 	<h6>Total correct question attempts: ${correctAttempts.size()}</h6>
 	<h6>Total incorrect question attempts: ${incorrectAttempts.size()}</h6>
-	<h6>Total average: ${totalAverage}</h6>
+	<h6>Total average: %${totalAverage}</h6>
 	<h3>Your Quiz Building Statistics:</h3>
 	<h6>Number of Quizzes Created: ${numQuizzesCreated}</h6>
 	<h6>Total number of incorrect guesses to your questions: ${numStumpQuestions}</h6>
 	<h6>Total number of correct guesses to your questions: ${numNonStumpQuestions}</h6>
-	<h6>Stump-Rate: ${stumpRate}</h6>
+	<h6>Stump-Rate: %${stumpRate}</h6>
 	
 	<form action="viewQuiz" method="GET"> 
-		<input type="submit" value="View My Quizzes">
+		<select name="quizID">
+			<c:forEach var="quiz" items="${quizzes}">
+	
+				<option value="${quiz.id}">${quiz.name}</option>
+				
+			</c:forEach>
+		</select> 
+		<input type = "hidden" name = "username" value = "${username}"/>
+		<input type = "submit" value = "View Quiz"/>
+	</form>
+	<form action = "createQuiz" method = "GET">
+		<input type = "hidden" name = "username" value = "${username}"/>
+		<input type = "submit" value = "Create New Quiz"/>
 	</form>
 	
 </body>

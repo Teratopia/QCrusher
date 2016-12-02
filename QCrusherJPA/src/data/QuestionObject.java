@@ -26,7 +26,7 @@ public class QuestionObject {
 	private String answer;
 	// private String category; //Enum?
 	// private int creatorId;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	@JoinTable(name = "quiz_question", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
 	private Set<Quiz> quizzes;
 	@OneToMany(mappedBy = "questionObject", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
@@ -38,12 +38,19 @@ public class QuestionObject {
 	}
 
 	public void addQuiz(Quiz quiz) {
+		System.out.println("in add quiz");
 		if (quizzes == null) {
 			quizzes = new HashSet<Quiz>();
 		}
 		if (!quizzes.contains(quiz)) {
 			quizzes.add(quiz);
+			quiz.addQuestionObject(this);
 		}
+		System.out.println("in questionObject.add new quiz");
+		for(Quiz quo : quizzes){
+			System.out.println(quo);
+		}
+		System.out.println("----");
 	}
 
 	public void removeQuiz(Quiz quiz) {

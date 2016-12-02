@@ -44,7 +44,7 @@ public class AccountController {
 			}
 		}
 		
-		Double totalAverage = ((double)(correctAQS.size())/(incorrectAQS.size()+correctAQS.size()));
+		String totalAverage = String.format("%.2f", (100.0*((double)(correctAQS.size())/(incorrectAQS.size()+correctAQS.size()))));
 		Set<Quiz> quizzes = user.getQuizzes();
 		List<QuestionObject> qos = new ArrayList<QuestionObject>();
 		List<AttemptQuestion> aqs = new ArrayList<AttemptQuestion>();
@@ -65,7 +65,7 @@ public class AccountController {
 		System.out.println(countNonStumperQuestions);
 		int numQuizzesCreated = quizzes.size();
 		int totalQuestions = countNonStumperQuestions + countStumperQuestions;
-		Double stumpRate = ((double)countStumperQuestions)/totalQuestions;
+		String stumpRate = String.format("%.2f", (100.0*((double)countStumperQuestions)/totalQuestions));
 		
 		mv.addObject("username", username);
 		mv.addObject("incorrectAttempts", incorrectAQS);
@@ -75,7 +75,7 @@ public class AccountController {
 		mv.addObject("stumpRate", stumpRate);
 		mv.addObject("numStumpQuestions", countStumperQuestions);
 		mv.addObject("numNonStumpQuestions", countNonStumperQuestions);
-		
+		mv.addObject("quizzes", quizzes);
 		
 		return mv;
 	}
