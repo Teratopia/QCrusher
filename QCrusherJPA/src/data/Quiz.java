@@ -86,9 +86,14 @@ public class Quiz {
 		}
 		if(!questionObjects.contains(qo)){
 			questionObjects.add(qo);
+			qo.addQuiz(this);
 		}
-		qo.addQuiz(this);
 		
+		System.out.println("in quiz add new question");
+		for(QuestionObject quo : questionObjects){
+			System.out.println(quo);
+		}
+		System.out.println("----");
 	}
 	
 	public void removeQuestionObject(QuestionObject qo){

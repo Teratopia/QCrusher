@@ -14,6 +14,7 @@
 <title>View Quiz</title>
 </head>
 <body>
+	<%@include file="/WEB-INF/common/head.inc"%>
 	<h3>${quiz.name}by ${quiz.user.username}</h3>
 	<hr>
 	<ul>
