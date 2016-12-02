@@ -4,15 +4,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Create Quiz</title>
 </head>
 <body>
+<div class="container-fluid">
 	<%@include file="/WEB-INF/common/head.inc"%>
-	
+		<div class="jumbotron">
+	<h3>Create a Quiz</h3>
+	</div>
 <c:choose>
 	<c:when test = "${empty quiz}">
-		<h1>Create a Quiz</h1>
 		<form action = "createNewQuiz">
 			<input type = "hidden" name = "username" value = "${username}">
 			<h4>Quiz Name: <input type = "text" name = "quizName"/></h4>
@@ -46,5 +49,6 @@
 		</form>
 	</c:when>
 </c:choose>
+</div>
 </body>
 </html>

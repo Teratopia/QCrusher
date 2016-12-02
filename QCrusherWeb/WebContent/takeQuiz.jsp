@@ -5,13 +5,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Take Quiz</title>
 </head>
 <body>
-	<h1>${quiz.name}</h1>
+<div class="container-fluid">
+<%@include file="/WEB-INF/common/head.inc"%>
+	<div class="jumbotron">
+		<h1>${quiz.name}</h1>
+		<em>Created by ${quiz.user.username} on ${quiz.createDate} </em>
+	</div>
 
-	<h3>Question Number ${questionNumber}: ${question.question}</h3>
+	<strong>Question Number ${questionNumber} of ${quiz.length}:</strong><br> 
+	<h3>${question.question}</h3>
 
 
 	<form action="takeQuiz">
@@ -21,17 +28,25 @@
 			<c:when test="${empty percentMatch}">
 			
 				<input type="text" name="answerText" />
-				<input type="submit" name="Submit" />
+				<input type="submit" class="btn btn-primary" name="Submit" />
 				
 			</c:when>
 			<c:when test="${not empty percentMatch}">
-
+				<c:choose>
+					<c:when test="${passFail eq 'Correct!'}">
+						<div class="alert alert-success">
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-danger">
+					</c:otherwise>
+				</c:choose>
 				<h3>Your Answer Was ${passFail}</h3>
-				<h3>You Answered: ${userAnswer}</h3>
-				<h3>Correct Answer: ${rightAnswer}</h3>
-				<h3>Percent Match: ${percentMatch}</h3>
-				<hr>
-				<h3>How would you rate this question?<select name="questionRating">
+				You Answered: ${userAnswer}<br>
+				Correct Answer: ${rightAnswer}<br>
+				Percent Match: ${percentMatch}<br>
+				</div>
+				<h5>How would you rate this question?</h5>
+				<select name="questionRating">
 							<option value="0">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -44,13 +59,14 @@
 							<option value="9">9</option>
 							<option value="10">10</option>
 					</select></h3>
-				<h3>Any feedback for the question writer?</h3>
+				<h5>Any feedback for the question writer?</h5>
 				<input type="text" name="feedbackText" />
 
-				<input type="submit" value="Continue" />
+				<input type="submit" class="btn btn-primary" value="Continue" />
+				
 			</c:when>
 		</c:choose>
 	</form>
-
+</div>
 </body>
 </html>
