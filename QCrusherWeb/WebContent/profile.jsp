@@ -6,16 +6,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Profile</title>
 </head>
 <body> 	
+<div class="container-fluid">
 	<%@include file="/WEB-INF/common/head.inc"%>
 	<%-- We are using the "principal" object (referenced by a JSTL variable of the same name).
 	This object is set upon login.--%>
 	<%-- <h3>Username in Spring Security Principal: <c:out value="${principal.username}"/></h3> --%>
 	
-	<h1>${username}'s Profile Page</h1>
+	<div class="jumbotron">
+	<h1>Your Profile</h1>
+	<em>You are logged in as <strong>${username}</strong></em>
+	</div>
 	<h3>Your Quiz Taking Statistics:</h3>
 	<h6>Total correct question attempts: ${correctAttempts.size()}</h6>
 	<h6>Total incorrect question attempts: ${incorrectAttempts.size()}</h6>
@@ -41,6 +46,6 @@
 		<input type = "hidden" name = "username" value = "${username}"/>
 		<input type = "submit" value = "Create New Quiz"/>
 	</form>
-	
+</div>
 </body>
 </html>

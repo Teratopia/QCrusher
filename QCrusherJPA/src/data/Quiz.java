@@ -218,6 +218,10 @@ public class Quiz {
 		return sum / attempts.size();
 	}
 	
+	public int getLength(){
+		return this.questionObjects.size();
+	}
+	
 	public double getHighScore(){
 		double highest = 0.0;
 		for (Attempt a : attempts){

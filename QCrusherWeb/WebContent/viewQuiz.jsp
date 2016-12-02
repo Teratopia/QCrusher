@@ -10,12 +10,17 @@
 
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View Quiz</title>
 </head>
 <body>
+<div class="container-fluid">
 	<%@include file="/WEB-INF/common/head.inc"%>
-	<h3>${quiz.name} by ${quiz.user.username}</h3>
+	<div class="jumbotron">
+		<h1>${quiz.name}</h1>
+		<em>Created by ${quiz.user.username} on ${quiz.createDate} </em>
+	</div>
 	<hr>
 	<ul>
 		<li>Created on ${quiz.createDate	}</li>
@@ -70,5 +75,6 @@
 		<input type="hidden" name="username" value="${quiz.user.username}" />
 		<input type = "submit" value = "Back to Profile"/>
 	</form>
+</div>
 </body>
 </html>

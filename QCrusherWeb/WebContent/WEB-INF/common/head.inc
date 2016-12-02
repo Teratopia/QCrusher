@@ -6,15 +6,21 @@
 	Don't style your divs with the inline "style" tag. Use a CSS file.
 --%>
 <div id="header">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<c:url value="/welcome"/>">QCrusher</a>
+    </div>
+    <ul class="nav navbar-nav">
 	<sec:authorize access="isAnonymous()">
-		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/login"/>">Log In</a></div>
-		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/signup"/>">Sign Up</a></div>
+		<li><a href="<c:url value="/login"/>">Log In</a></li>
+		<li><a href="<c:url value="/signup"/>">Sign Up</a></li>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/logout"/>">Log Out</a></div>
-		<div style="float:right; margin-right: 10px;"><a href="<c:url value="/account?username=${principal.username}"/>">Account</a></div>
+	<li><a href="<c:url value="/logout"/>">Log Out</a></li>
+	<li><a href="<c:url value="/account?username=${principal.username}"/>">Account</a></li>
 	</sec:authorize>
-	<div style="float:right; margin-right: 10px;"><a href="<c:url value="/"/>">Home</a></div>
-
+	</ul>
+  </div>
+</nav>
 </div>
-<div style="clear:both;"></div>
