@@ -86,11 +86,11 @@
 		<input type = "submit" class="btn btn-default" value = "Back to Profile"/>
 	</form>
 
-	<form action = "deleteQuiz">
+<%-- 	<form action = "deleteQuiz">
 		<input type = "hidden" name = "quizId" value = "${quiz.id}">
 		<input type="hidden" name="username" value="${quiz.user.username}" />
 		<input type = "submit" class="btn btn-danger" value = "Delete Quiz"/>
-	</form>
+	</form> --%>
 	</c:if>
 </div>
 </body>

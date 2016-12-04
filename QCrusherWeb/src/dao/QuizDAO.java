@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import data.Attempt;
+import data.AttemptQuestion;
 import data.QuestionObject;
 import data.Quiz;
+import data.QuizRating;
 
 @Transactional
 public class QuizDAO {
@@ -63,7 +65,21 @@ public class QuizDAO {
 			q.getQuizzes().remove(quiz);
 			em.persist(q);
 		}
-
+		for(Attempt a : quiz.getAttempts()){
+			
+			a.getUser().removeAttempt(a);
+			for(AttemptQuestion aq : a.getAttemptQuestions()){
+				a.removeAttemptQuestion(aq);
+			}
+			em.remove(a);
+			
+		}
+		for(QuizRating qr : quiz.getQuizRatings()){
+			
+			
+			
+		}
+		quiz.getUser().removeQuiz(quiz);
 		
 		em.remove(quiz);
 		System.err.println(em.find(Quiz.class, quizId));
